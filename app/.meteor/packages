@@ -24,3 +24,6 @@ accounts-password
 # sanjo:jasmine
 # velocity:html-reporter
 reywood:bootstrap3-sass
+momentjs:moment
+accounts-facebook
+msavin:mongol
