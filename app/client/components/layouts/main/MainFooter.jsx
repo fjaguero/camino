@@ -9,6 +9,6 @@ Camino.MainFooter = React.createClass({
 
                 </div>
             </div>
-        )
+        );
     }
 });
