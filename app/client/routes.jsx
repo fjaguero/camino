@@ -18,10 +18,18 @@ FlowRouter.route("/login", {
     }
 });
 
+FlowRouter.triggers.enter([checkIsLoggedIn]);
+
 function renderMainLayoutWith(component) {
     ReactLayout.render(Camino.MainLayout, {
         header: <Camino.MainHeader />,
         content: component,
         footer: <Camino.MainFooter />
     });
+}
+
+function checkIsLoggedIn() {
+  if (!Meteor.userId()) {
+    FlowRouter.go('Login');
+  }
 }
