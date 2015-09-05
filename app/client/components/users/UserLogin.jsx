@@ -6,17 +6,15 @@ Camino.UserLogin = React.createClass({
     getInitialState() {
         return {
             errors: {}
-        }
+        };
     },
     getMeteorData() {
         return {
 
-        }
+        };
     },
     onSubmit(event) {
         event.preventDefault();
-
-        var self = this;
 
         var email = $(event.target).find("[name=email]").val();
         var password = $(event.target).find("[name=password]").val();
@@ -24,14 +22,14 @@ Camino.UserLogin = React.createClass({
         var errors = {};
 
         if (!email) {
-            errors.email = "Email required"
+            errors.email = "Email required";
         }
 
         if (!password) {
-            errors.password = "Password required"
+            errors.password = "Password required";
         }
 
-        self.setState({
+        this.setState({
             errors: errors
         });
 
@@ -41,7 +39,7 @@ Camino.UserLogin = React.createClass({
 
         Meteor.loginWithPassword(email, password, (err) => {
             if (err) {
-                self.setState({
+                this.setState({
                     errors: {'none': err.reason}
                 });
 
@@ -56,17 +54,17 @@ Camino.UserLogin = React.createClass({
             <div className="container">
                 <div className="row">
                     <div className="col-sm-6 col-sm-offset-3">
-                        <h1>Login</h1>
+                        <h1>Welcome to Camino</h1>
 
                         <form onSubmit={this.onSubmit}>
                             <Camino.AuthErrors errors={this.state.errors} />
                             <Camino.FormInput hasError={!!this.state.errors.email} name="Email" type="text" label="Email" />
                             <Camino.FormInput hasError={!!this.state.errors.password} name="Password" type="password" label="Password" />
-                            <input type="submit" className="btn btn-default"/>
+                            <input type="submit" value="Login" className="btn btn-default"/>
                         </form>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 });
