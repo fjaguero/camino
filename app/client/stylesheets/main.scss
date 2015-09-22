@@ -1,6 +1,38 @@
 @import '.meteor/local/build/programs/server/assets/packages/reywood_bootstrap3-sass/_bootstrap';
 
+// Temporal Override
+.jumbotron {
+  background-color: white;
+}
+
 // NAVBAR
 .navbar {
   margin-bottom: 0px;
+}
+
+// Tasks
+.tasks__list {
+  padding: 0;
+  list-style: none;
+}
+
+.tasks__list {
+  padding: 0;
+  list-style: none;
+}
+
+.tasks__list__single-task {
+  margin: 15px 0;
+  padding: 10px;
+  border: 1px solid #EEE;
+}
+
+
+.tasks__add-task-form {
+  display: flex;
+}
+
+.tasks__add-task-form__input {
+  margin-right: 5px;
+  width: 100%;
 }
