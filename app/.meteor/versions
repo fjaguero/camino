@@ -19,7 +19,7 @@ caching-html-compiler@1.0.2
 callback-hook@1.0.4
 check@1.0.6
 coffeescript@1.0.10
-cosmos:browserify@0.7.2
+cosmos:browserify@0.7.4
 dburles:collection-helpers@1.0.3
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
@@ -35,7 +35,7 @@ ejson@1.0.7
 email@1.0.7
 facebook@1.2.2
 fastclick@1.0.7
-fourseven:scss@3.3.3_1
+fourseven:scss@3.3.3_3
 geojson-utils@1.0.4
 hot-code-push@1.0.0
 html-tools@1.0.5
@@ -52,11 +52,11 @@ launch-screen@1.0.4
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
-matb33:collection-hooks@0.8.0
+matb33:collection-hooks@0.8.1
 meteor@1.1.9
 meteor-base@1.0.1
 meteorhacks:flow-layout@1.4.2
-meteortoys:toykit@1.0.1
+meteortoys:toykit@1.0.2
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1
@@ -83,7 +83,7 @@ reactive-dict@1.1.2
 reactive-var@1.0.6
 reload@1.1.4
 retry@1.0.4
-reywood:bootstrap3-sass@3.3.5_1
+reywood:bootstrap3-sass@3.3.5_2
 routepolicy@1.0.6
 service-configuration@1.0.5
 session@1.1.1
