@@ -3,7 +3,7 @@ Camino.Home = React.createClass({
         return (
             <div className="jumbotron">
                 <div className="container">
-                    <TaskList />
+                    <Mit />
                 </div>
             </div>
         );
