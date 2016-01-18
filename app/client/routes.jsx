@@ -1,10 +1,20 @@
 FlowRouter.route("/", {
-    name: 'Home',
+    name: "Home",
     subscriptions(params) {
 
     },
     action(params) {
         renderMainLayoutWith(<Camino.Home />);
+    }
+});
+
+FlowRouter.route("/morning-gratitude", {
+    name: "MorningGratitude",
+    subscriptions(params) {
+
+    },
+    action(params) {
+      renderMainLayoutWith(<Camino.MorningGratitude />);
     }
 });
 
@@ -14,7 +24,7 @@ FlowRouter.route("/login", {
 
     },
     action(params) {
-        renderMainLayoutWith(<Camino.UserLogin />);
+      renderMainLayoutWith(<Camino.UserLogin />);
     }
 });
 
