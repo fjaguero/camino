@@ -1,10 +1,10 @@
 Mit = React.createClass({
   mixins: [ReactMeteorData],
 
-  getMeteorData: function() {
+  getMeteorData() {
     // Get the MITs from the current day
-    var today = moment().startOf('day')
-    var tomorrow = moment(today).add(1, 'days')
+    let today = moment().startOf('day')
+    let tomorrow = moment(today).add(1, 'days')
 
     return {
       mits: Mits.findOne({
