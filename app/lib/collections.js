@@ -1,2 +1,2 @@
-Tasks = new Mongo.Collection("tasks");
-Mits = new Mongo.Collection("mits");
+Mits      = new Mongo.Collection("mits")
+Gratitude = new Mongo.Collection("gratitude")
