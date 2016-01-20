@@ -12,8 +12,7 @@ Camino.MorningGratitude = React.createClass({
         'createdAt': {
           $gte: today.toDate(),
           $lt: tomorrow.toDate()
-        },
-        'type': 'morning'
+        }
       })
     }
   },
@@ -25,8 +24,7 @@ Camino.MorningGratitude = React.createClass({
             <div className="mit mit__container">
               <h2 className="mit__title">Morning gratitude</h2>
                <form className="mit__list" name="mit" >
-                 <MitList
-                   type="morning"
+                 <MorningGratitudeList
                    data={this.data.gratitude}
                   />
               </form>
