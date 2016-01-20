@@ -4,7 +4,7 @@ FlowRouter.route("/", {
 
     },
     action(params) {
-        renderMainLayoutWith(<Camino.Home />);
+      renderMainLayoutWith(<Camino.Home />);
     }
 });
 
@@ -27,6 +27,12 @@ FlowRouter.route("/login", {
       renderMainLayoutWith(<Camino.UserLogin />);
     }
 });
+
+FlowRouter.notFound = {
+  action() {
+    FlowRouter.go('/');
+  }
+};
 
 FlowRouter.triggers.enter([checkIsLoggedIn]);
 
