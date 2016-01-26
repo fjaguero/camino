@@ -24,13 +24,11 @@ accounts-password
 # velocity:html-reporter
 reywood:bootstrap3-sass
 momentjs:moment
-accounts-facebook
 msavin:mongol
 standard-minifiers
 meteor-base
 mobile-experience
 mongo
-blaze-html-templates
 session
 jquery
 tracker
@@ -42,3 +40,4 @@ spacebars
 check
 autopublish
 insecure
+maxharris9:classnames
