@@ -5,9 +5,21 @@
   background-color: white;
 }
 
-// NAVBAR
-.navbar {
-  margin-bottom: 0px;
+// Navbar
+.nav-justified > li, .nav-tabs.nav-justified > li {
+  display: table-cell;
+  width: 1%;
+  cursor: pointer;
+}
+
+.nav-pills li:first-child a, .nav-pills li:last-child a {
+  border-bottom-left-radius: 0;
+}
+
+.nav-pills > li > a {
+  border-radius: 0;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
 // Mit

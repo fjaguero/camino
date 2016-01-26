@@ -2,7 +2,7 @@ Camino.MainHeader = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
       return {
-          currentUser: Meteor.user()
+        currentUser: Meteor.user()
       };
     },
     handleLogout() {
@@ -14,32 +14,58 @@ Camino.MainHeader = React.createClass({
       FlowRouter.go(route)
     },
     render() {
-      let logoutButton
+      let logoutButton, homeButton, mgtButton, timelineButton, mitButton
       let { currentUser } = this.data
-      let mitButton
 
-      homeButton = (
-        <li><a onClick={this.navigateTo.bind(this, '/')}>Home</a></li>
-      )
+      // FIXME: Refactor to use a single method for the classNames
+      let homeBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Home' })
+      let mgBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'MorningGratitude' })
+      let timeBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Timeline' })
 
-      mgtButton = (
-        <li><a onClick={this.navigateTo.bind(this, '/morning-gratitude')}>Morning Gratitude</a></li>
-      )
-
+      // Navbar buttons
       if (currentUser) {
-          logoutButton = (
-            <li><a onClick={this.handleLogout}>Logout</a></li>
-          );
+        homeButton = (
+          <li title="Home" className={homeBtnClass}>
+            <a onClick={this.navigateTo.bind(this, '/')}>
+              <span className="glyphicon glyphicon-home" aria-hidden="true"></span>
+            </a>
+          </li>
+        )
+
+        mgtButton = (
+          <li title="Morning Gratitude" className={mgBtnClass}>
+            <a onClick={this.navigateTo.bind(this, '/morning-gratitude')}>
+              <span className="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+            </a>
+          </li>
+        )
+
+        timelineButton = (
+          <li title="Timeline" className={timeBtnClass}>
+            <a onClick={this.navigateTo.bind(this, '/morning-gratitude')}>
+              <span className="glyphicon glyphicon-time" aria-hidden="true"></span>
+            </a>
+          </li>
+        )
+
+        logoutButton = (
+          <li>
+            <a title="Logout" onClick={this.handleLogout}>
+              <span className="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+            </a>
+          </li>
+        )
       }
 
       return (
-          <nav className="navbar navbar-default">
-              <div className="container">
-                {homeButton}
-                {mgtButton}
-                {logoutButton}
-              </div>
-          </nav>
+        <nav>
+          <ul className="nav nav-pills nav-justified">
+            {homeButton}
+            {mgtButton}
+            {timelineButton}
+            {logoutButton}
+          </ul>
+        </nav>
       );
     }
 });
