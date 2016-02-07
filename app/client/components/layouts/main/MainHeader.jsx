@@ -42,7 +42,7 @@ Camino.MainHeader = React.createClass({
 
         timelineButton = (
           <li title="Timeline" className={timeBtnClass}>
-            <a onClick={this.navigateTo.bind(this, '/morning-gratitude')}>
+            <a onClick={this.navigateTo.bind(this, '/timeline')}>
               <span className="glyphicon glyphicon-time" aria-hidden="true"></span>
             </a>
           </li>

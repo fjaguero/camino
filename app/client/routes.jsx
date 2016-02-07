@@ -18,6 +18,16 @@ FlowRouter.route("/morning-gratitude", {
     }
 });
 
+FlowRouter.route("/timeline", {
+    name: "Timeline",
+    subscriptions(params) {
+
+    },
+    action(params) {
+      renderMainLayoutWith(<Camino.Timeline />);
+    }
+});
+
 FlowRouter.route("/login", {
     name: "Login",
     subscriptions(params) {
