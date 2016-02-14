@@ -88,10 +88,10 @@ Selectable = React.createClass({
     return {
       onSelection: function () {},
       component: 'div',
-      distance: 0,
-      tolerance: 0,
-      globalMouse: false,
-      disableSingleSelection: false
+      distance: 1,
+      tolerance: 1,
+      globalMouse: true,
+      disableSingleSelection: true
     };
   },
 
@@ -99,11 +99,7 @@ Selectable = React.createClass({
    * Attach global event listeners
    */
   componentDidMount: function() {
-    console.log('this')
-    console.log(this)
     var node = ReactDOM.findDOMNode(this);
-    console.log('node')
-    console.log(node)
     node.addEventListener('mousedown', this._mouseDown);
     node.addEventListener('keydown', this._keyListener);
     node.addEventListener('keyup', this._keyListener);
