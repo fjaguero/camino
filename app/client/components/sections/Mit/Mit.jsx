@@ -2,13 +2,14 @@ Mit = React.createClass({
   mixins: [ReactMeteorData],
 
   getMeteorData() {
+    let sub = Meteor.subscribe("mits");
+
     // Get the MITs from the current day
     let today = moment().startOf('day')
     let tomorrow = moment(today).add(1, 'days')
 
     return {
       mits: Mits.findOne({
-        'userId': Meteor.userId(),
         'createdAt': {
           $gte: today.toDate(),
           $lt: tomorrow.toDate()

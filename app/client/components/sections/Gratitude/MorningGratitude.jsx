@@ -2,6 +2,8 @@ Camino.MorningGratitude = React.createClass({
   mixins: [ReactMeteorData],
 
   getMeteorData() {
+    let sub = Meteor.subscribe("gratitude");
+
     // Get the morning gratitude from the current day
     var today = moment().startOf('day')
     var tomorrow = moment(today).add(1, 'days')
