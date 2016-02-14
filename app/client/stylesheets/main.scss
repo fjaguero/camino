@@ -75,8 +75,12 @@
   height: 42px;
   width: 55px;
   position: absolute;
-  padding-right: 13px;
   top: 0px;
   padding-top: 10px;
   padding-left: 9px;
+}
+
+.item-content {
+  float: right;
+  width: 400px;
 }
