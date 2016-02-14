@@ -15,12 +15,11 @@ MitList = React.createClass({
     mitsArray = []
     mitsArray.push(mit1, mit2, mit3)
 
-    Mits.insert({
-      'value': mitsArray,
-      'createdAt': new Date(),
-      'userId': Meteor.userId()
-    })
+    let mits = {
+      'value': mitsArray
+    }
 
+    Meteor.call('createMits', mits)
   },
 
   onUpdateMits(e) {
@@ -34,10 +33,7 @@ MitList = React.createClass({
     mitsArray = []
     mitsArray.push(mit1, mit2, mit3)
 
-    Mits.update(this.props.mits._id, {
-      $set: {"value": mitsArray}
-    })
-
+    Meteor.call('updateMits', this.props.mits._id, mitsArray)
   },
   render() {
     let hasValuesForToday = this.props.mits && this.props.mits.value

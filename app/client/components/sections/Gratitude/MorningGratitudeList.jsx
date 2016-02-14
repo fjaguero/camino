@@ -15,12 +15,11 @@ MorningGratitudeList = React.createClass({
     mgtArray = []
     mgtArray.push(mgt1, mgt2, mgt3)
 
-    Gratitude.insert({
-      'value': mgtArray,
-      'createdAt': new Date(),
-      'userId': Meteor.userId()
-    })
+    gratitude = {
+      'value': mgtArray
+    }
 
+    Meteor.call('createGratitude', gratitude)
   },
 
   onUpdateGratitudes(e) {
@@ -34,9 +33,7 @@ MorningGratitudeList = React.createClass({
     mgtsArray = []
     mgtsArray.push(mgt1, mgt2, mgt3)
 
-    Gratitude.update(this.props.data._id, {
-      $set: {"value": mgtsArray}
-    })
+    Meteor.call('updateGratitude', this.props.data._id, mgtsArray)
 
   },
   render() {
