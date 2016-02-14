@@ -14,13 +14,22 @@ Camino.MainHeader = React.createClass({
       FlowRouter.go(route)
     },
     render() {
-      let logoutButton, homeButton, mgtButton, timelineButton, mitButton
+      let logoutButton,
+      homeButton,
+      mgtButton,
+      timelineButton,
+      mitButton,
+      goalsButton,
+      optionsButton
+      
       let { currentUser } = this.data
 
       // FIXME: Refactor to use a single method for the classNames
       let homeBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Home' })
       let mgBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'MorningGratitude' })
       let timeBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Timeline' })
+      let goalsBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Goals' })
+      let optionsBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Options' })
 
       // Navbar buttons
       if (currentUser) {
@@ -48,6 +57,22 @@ Camino.MainHeader = React.createClass({
           </li>
         )
 
+        goalsButton = (
+          <li title="Goals" className={goalsBtnClass}>
+            <a onClick={this.navigateTo.bind(this, '/goals')}>
+              <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
+            </a>
+          </li>
+        )
+
+        optionsButton = (
+          <li title="Goals" className={optionsBtnClass}>
+            <a onClick={this.navigateTo.bind(this, '/options')}>
+              <span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+          </li>
+        )
+
         logoutButton = (
           <li>
             <a title="Logout" onClick={this.handleLogout}>
@@ -63,6 +88,8 @@ Camino.MainHeader = React.createClass({
             {homeButton}
             {mgtButton}
             {timelineButton}
+            {goalsButton}
+            {optionsButton}
             {logoutButton}
           </ul>
         </nav>
