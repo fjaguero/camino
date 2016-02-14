@@ -16,9 +16,6 @@ Camino.Timeline = React.createClass({
       }
     }).fetch();
 
-    console.log('TASKS =>')
-    console.log(tasks)
-
     return {'tasks': tasks}
   },
 
