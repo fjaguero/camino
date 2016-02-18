@@ -4,7 +4,7 @@ MitList = React.createClass({
   },
 
   // Event Handling
-  onSaveMits: function(e) {
+  onSaveMits(e) {
     e.preventDefault()
 
     let mit1 = ReactDOM.findDOMNode(this.refs['mit-input-1']).value,
@@ -22,6 +22,13 @@ MitList = React.createClass({
     Meteor.call('createMits', mits)
   },
 
+  onMitStatusChange(index) {
+    console.log('Mit status')
+    console.log(index)
+    // Get checked status
+    console.log(this.refs["mit-status-" + index].checked)
+  },
+
   onUpdateMits(e) {
     e.preventDefault()
 
@@ -36,6 +43,7 @@ MitList = React.createClass({
     Meteor.call('updateMits', this.props.mits._id, mitsArray)
   },
   render() {
+    // FIXME: Refactor
     let hasValuesForToday = this.props.mits && this.props.mits.value
     let list
     let button
@@ -43,21 +51,29 @@ MitList = React.createClass({
     // Show the tasks for day if we already have them
     if (hasValuesForToday) {
       list = (
-        this.props.mits.value.map(function (mit, index) {
+        this.props.mits.value.map((mit, index) => {
             index =  index + 1
             ref = "mit-input-" + index
+            status = "mit-status-" + index
+
           return (
-            <div key={mit} className="mit__list__element">
-              <span>{index}.</span>
-              <input
-                className="mit__list__element__input"
-                ref={ref}
-                type="text"
-                defaultValue={mit}
-              />
+            <div key={mit} className="row">
+              <div className="mit__list__element col-lg-6">
+                <div className="input-group">
+                  <span className="input-group-addon">
+                    <input
+                      defaultChecked={mit.completed}
+                      type="checkbox"
+                      onChange={this.onMitStatusChange.bind(this, index)}
+                      ref={status}
+                    />
+                  </span>
+                  <input defaultValue={mit} type="text" className="form-control" ref={ref} />
+                </div>
+              </div>
             </div>
-          )
-        })
+          )}
+        )
       )
 
       button = (
@@ -71,23 +87,42 @@ MitList = React.createClass({
       // Show the form since we don't have tasks for today
       list = (
         <span>
-          <div className="mit__list__element">
-            <span>1.</span>
-            <input className="mit__list__element__input" ref="mit-input-1" type="text" />
+          <div className="row">
+            <div className="mit__list__element col-lg-6">
+              <div className="input-group">
+                <span className="input-group-addon">
+                  <input type="checkbox" />
+                </span>
+                <input type="text" className="form-control" ref="mit-input-1" />
+              </div>
+            </div>
           </div>
-          <div className="mit__list__element">
-            <span>2.</span>
-            <input className="mit__list__element__input" ref="mit-input-2" type="text" />
+          <div className="row">
+            <div className="mit__list__element col-lg-6">
+              <div className="input-group">
+                <span className="input-group-addon">
+                  <input type="checkbox" />
+                </span>
+                <input type="text" className="form-control" ref="mit-input-2" />
+              </div>
+            </div>
           </div>
-          <div className="mit__list__element">
-            <span>3.</span>
-            <input className="mit__list__element__input" ref="mit-input-3" type="text" />
+          <div className="row">
+            <div className="mit__list__element col-lg-6">
+              <div className="input-group">
+                <span className="input-group-addon">
+                  <input type="checkbox" />
+                </span>
+                <input type="text" className="form-control" ref="mit-input-3" />
+              </div>
+            </div>
           </div>
+
         </span>
       )
 
       button = (
-        <button type="submit" onClick={this.onSaveMits} className="btn btn-lg btn-block btn-primary">
+        <button type="submit" onClick={this.onSaveMits} className="btn btn-lg btn-block btn-primary mit__confirm-btn">
           Continue to day schedule
         </button>
       )

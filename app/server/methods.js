@@ -33,7 +33,7 @@ Meteor.methods({
     Mits.insert(mits)
   },
 
-  updateMits: function(id, newValue) {
+  updateMit: function(id, newValue) {
     Mits.update(id, {
       $set: {"value": newValue}
     })
