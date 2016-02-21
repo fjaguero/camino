@@ -28,20 +28,12 @@
   background-color: white;
 }
 
-.mit__title {
-  text-transform: uppercase;
-}
-
 .mit__list {
   list-style: none;
 }
 
 .mit__list__element {
   margin: 10px 0;
-}
-
-.mit__confirm-btn {
-  margin-top: 20px;
 }
 
 // Tasks
@@ -89,6 +81,6 @@
 }
 
 .item-content {
-  float: right;
-  width: 400px;
+  position: relative;
+  left: 70px;
 }

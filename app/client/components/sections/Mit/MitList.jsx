@@ -58,7 +58,7 @@ MitList = React.createClass({
 
           return (
             <div key={mit} className="row">
-              <div className="mit__list__element col-lg-6">
+              <div className="mit__list__element col-lg-12">
                 <div className="input-group">
                   <span className="input-group-addon">
                     <input
@@ -88,7 +88,7 @@ MitList = React.createClass({
       list = (
         <span>
           <div className="row">
-            <div className="mit__list__element col-lg-6">
+            <div className="mit__list__element col-lg-12">
               <div className="input-group">
                 <span className="input-group-addon">
                   <input type="checkbox" />
@@ -98,7 +98,7 @@ MitList = React.createClass({
             </div>
           </div>
           <div className="row">
-            <div className="mit__list__element col-lg-6">
+            <div className="mit__list__element col-lg-12">
               <div className="input-group">
                 <span className="input-group-addon">
                   <input type="checkbox" />
@@ -108,7 +108,7 @@ MitList = React.createClass({
             </div>
           </div>
           <div className="row">
-            <div className="mit__list__element col-lg-6">
+            <div className="mit__list__element col-lg-12">
               <div className="input-group">
                 <span className="input-group-addon">
                   <input type="checkbox" />
@@ -122,14 +122,14 @@ MitList = React.createClass({
       )
 
       button = (
-        <button type="submit" onClick={this.onSaveMits} className="btn btn-lg btn-block btn-primary mit__confirm-btn">
+        <button type="submit" onClick={this.onSaveMits} className="btn btn-lg btn-block btn-primary">
           Continue to day schedule
         </button>
       )
     }
 
     return (
-      <div>
+      <div className="col-lg-12">
         {list}
         {button}
       </div>

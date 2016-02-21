@@ -45,17 +45,17 @@ MorningGratitudeList = React.createClass({
     if (hasValuesForToday) {
       list = (
         this.props.data.value.map(function (mgt, index) {
-            index =  index + 1
             ref = "mgt-input-" + index
             return (
-              <div key={mgt} className="mit__list__element">
-                <span>{index}.</span>
-                <input
-                  className="mit__list__element__input"
-                  ref={ref}
-                  type="text"
-                  defaultValue={mgt}
-                />
+              <div className="row">
+                <div key={mgt} className="mit__list__element col-lg-12">
+                  <input
+                    className="form-control"
+                    ref={ref}
+                    type="text"
+                    defaultValue={mgt}
+                  />
+                </div>
               </div>
             )
 
@@ -73,17 +73,20 @@ MorningGratitudeList = React.createClass({
       // Show the form since we don't have tasks for today
       list = (
         <span>
-          <div className="mit__list__element">
-            <span>1.</span>
-            <input className="mit__list__element__input" ref="mgt-input-1" type="text" />
+          <div className="row">
+            <div className="mit__list__element col-lg-12">
+              <input className="form-control" ref="mgt-input-1" type="text" />
+            </div>
           </div>
-          <div className="mit__list__element">
-            <span>2.</span>
-            <input className="mit__list__element__input" ref="mgt-input-2" type="text" />
+          <div className="row">
+            <div className="mit__list__element col-lg-12">
+              <input className="form-control" ref="mgt-input-2" type="text" />
+            </div>
           </div>
-          <div className="mit__list__element">
-            <span>3.</span>
-            <input className="mit__list__element__input" ref="mgt-input-3" type="text" />
+          <div className="row">
+            <div className="mit__list__element col-lg-12">
+              <input className="form-control" ref="mgt-input-3" type="text" />
+            </div>
           </div>
         </span>
       )
@@ -96,7 +99,7 @@ MorningGratitudeList = React.createClass({
     }
 
     return (
-      <div>
+      <div className="col-lg-12">
         {list}
         {button}
       </div>
