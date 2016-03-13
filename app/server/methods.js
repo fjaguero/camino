@@ -41,11 +41,10 @@ Meteor.methods({
 
   // Goals
   createGoal: function(goal) {
-    // FIXME: Use collection hooks
     goal.createdAt = new Date()
     goal.userId = Meteor.userId()
 
-    Goals.insert(mits)
+    Goals.insert(goal)
   },
 
   updateGoals: function(id, newValue) {

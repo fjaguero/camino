@@ -90,3 +90,40 @@
   position: relative;
   left: 70px;
 }
+
+
+// Goals
+.goals__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.goals__list__item {
+  margin-top: 20px;
+}
+
+.goals__list__type {
+  text-transform: uppercase;
+}
+
+// Config
+.config__subtitle {
+  margin-bottom: 30px;
+}
+
+.config__form .btn-primary {
+  float: left;
+  margin-top: 15px;
+}
+
+.config__form__goals-select {
+  width: 50%;
+  float: right;
+}
+
+.config__form__goals-text {
+  width: 45%;
+  float: left;
+  height: 38px;
+}

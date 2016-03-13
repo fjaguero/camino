@@ -21,7 +21,7 @@ Camino.MainHeader = React.createClass({
       mitButton,
       goalsButton,
       optionsButton
-      
+
       let { currentUser } = this.data
 
       // FIXME: Refactor to use a single method for the classNames
@@ -29,7 +29,7 @@ Camino.MainHeader = React.createClass({
       let mgBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'MorningGratitude' })
       let timeBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Timeline' })
       let goalsBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Goals' })
-      let optionsBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Options' })
+      let optionsBtnClass = classNames({ 'active': FlowRouter.current().route.name === 'Config' })
 
       // Navbar buttons
       if (currentUser) {
@@ -66,8 +66,8 @@ Camino.MainHeader = React.createClass({
         )
 
         optionsButton = (
-          <li title="Goals" className={optionsBtnClass}>
-            <a onClick={this.navigateTo.bind(this, '/options')}>
+          <li title="Config" className={optionsBtnClass}>
+            <a onClick={this.navigateTo.bind(this, '/config')}>
               <span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
           </li>

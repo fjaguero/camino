@@ -38,6 +38,16 @@ FlowRouter.route("/goals", {
     }
 });
 
+FlowRouter.route("/config", {
+    name: "Config",
+    subscriptions(params) {
+
+    },
+    action(params) {
+      renderMainLayoutWith(<Camino.Config />);
+    }
+});
+
 FlowRouter.route("/login", {
     name: "Login",
     subscriptions(params) {
