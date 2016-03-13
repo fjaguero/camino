@@ -28,6 +28,16 @@ FlowRouter.route("/timeline", {
     }
 });
 
+FlowRouter.route("/goals", {
+    name: "Goals",
+    subscriptions(params) {
+
+    },
+    action(params) {
+      renderMainLayoutWith(<Camino.Goals />);
+    }
+});
+
 FlowRouter.route("/login", {
     name: "Login",
     subscriptions(params) {

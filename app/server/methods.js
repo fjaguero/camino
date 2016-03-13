@@ -37,6 +37,21 @@ Meteor.methods({
     Mits.update(id, {
       $set: {"value": newValue}
     })
+  },
+
+  // Goals
+  createGoal: function(goal) {
+    // FIXME: Use collection hooks
+    goal.createdAt = new Date()
+    goal.userId = Meteor.userId()
+
+    Goals.insert(mits)
+  },
+
+  updateGoals: function(id, newValue) {
+    Goals.update(id, {
+      $set: {"value": newValue}
+    })
   }
 
 });

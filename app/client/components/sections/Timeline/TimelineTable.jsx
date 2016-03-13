@@ -68,7 +68,7 @@ TimelineTable = React.createClass({
     ]
 
     return (
-      <div className="timeline mit__container">
+      <div className="timeline section__container">
         <h2 className="title">Timeline</h2>
 
           <Selectable
@@ -121,7 +121,7 @@ let TimeRange = React.createClass({
       if (hasTask) {
         this.task = task
       }
-      
+
     })
 
     if (this.task && this.task.name) {

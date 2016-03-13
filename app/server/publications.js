@@ -15,3 +15,9 @@ Meteor.publish("tasks", function (userId) {
     'userId': this.userId
   });
 });
+
+Meteor.publish("goals", function (userId) {
+  return Goals.find({
+    'userId': this.userId
+  });
+});

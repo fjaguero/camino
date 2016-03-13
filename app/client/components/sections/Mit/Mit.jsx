@@ -20,7 +20,7 @@ Mit = React.createClass({
 
   render() {
     return (
-      <div className="mit mit__container">
+      <div className="mit section__container">
         <h2 className="mit__title">Today targets</h2>
          <form className="mit__list" name="mit" >
            <MitList mits={this.data.mits} />

@@ -23,7 +23,7 @@ Camino.MorningGratitude = React.createClass({
     return (
       <div className="jumbotron">
           <div className="container">
-            <div className="mit mit__container">
+            <div className="mit section__container">
               <h2 className="mit__title">Morning gratitude</h2>
                <form className="mit__list" name="mit" >
                  <MorningGratitudeList
