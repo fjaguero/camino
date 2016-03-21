@@ -68,7 +68,7 @@ TimelineTable = React.createClass({
     ]
 
     return (
-      <div className="timeline section__container">
+      <div className="jumbotron timeline">
         <h2 className="title">Timeline</h2>
 
           <Selectable
