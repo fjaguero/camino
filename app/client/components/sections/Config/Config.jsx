@@ -26,9 +26,10 @@ Camino.Config = React.createClass({
     let goalText = ReactDOM.findDOMNode(this.refs['goal-text']).value
     let goalType = ReactDOM.findDOMNode(this.refs['goal-type']).getElementsByTagName('input')[0].value
 
-    goal = {}
-    goal.value = goalText
-    goal.type = goalType
+    goal = {
+      value: goalText,
+      type: goalType
+    }
 
     Meteor.call('createGoal', goal)
   },

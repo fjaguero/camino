@@ -43,7 +43,8 @@ Meteor.methods({
   createGoal: function(goal) {
     goal.createdAt = new Date()
     goal.userId = Meteor.userId()
-
+    goal.completed = false
+    
     Goals.insert(goal)
   },
 
