@@ -47,9 +47,19 @@ Meteor.methods({
     Goals.insert(goal)
   },
 
+  deleteGoal: function(id) {
+    Goals.remove(id)
+  },
+
   updateGoals: function(id, newValue) {
     Goals.update(id, {
       $set: {"value": newValue}
+    })
+  },
+
+  completeGoal: function(id) {
+    Goals.update(id, {
+      $set: {"completed": true}
     })
   }
 
