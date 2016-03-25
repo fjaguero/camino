@@ -27,15 +27,31 @@ Meteor.methods({
   // MITs
   createMits: function(mits) {
     // FIXME: Use collection hooks
-    mits.createdAt = new Date()
-    mits.userId = Meteor.userId()
+    var mitsId = uuid.new()
 
-    Mits.insert(mits)
+    mits.forEach(function(mit) {
+      mit.completed = false
+      mit.userId = Meteor.userId()
+      mit.createdAt = new Date()
+      mit.mitsId = mitsId
+
+      Mits.insert(mit)
+    })
+
   },
 
-  updateMits: function(id, newValue) {
+  updateMits: function(mits) {
+    mits.forEach(function(mit) {
+      Mits.update(mit._id, {
+        $set: {"value": mit.value}
+      })
+    })
+
+  },
+
+  updateMitStatus: function(id, newStatus) {
     Mits.update(id, {
-      $set: {"value": newValue}
+      $set: {"completed": newStatus}
     })
   },
 
