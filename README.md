@@ -1,3 +1,5 @@
+[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/fuck-it-ship-it.svg)](http://forthebadge.com)
+
 [![Code Climate](https://codeclimate.com/github/fjaguero/camino/badges/gpa.svg)](https://codeclimate.com/github/fjaguero/camino)
 
 ![Camino](http://cl.ly/image/0g2f3B0R2I40/camino-logo.png)
