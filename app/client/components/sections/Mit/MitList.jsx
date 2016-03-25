@@ -1,85 +1,103 @@
 MitList = React.createClass({
   propTypes: {
-    mits: React.PropTypes.object
+    mits: React.PropTypes.array
   },
 
   // Event Handling
-  onSaveMits(e) {
+  onSubmit(e) {
     e.preventDefault()
+    this.onUpdateMits()
+  },
 
-    let mit1 = ReactDOM.findDOMNode(this.refs['mit-input-1']).value,
-    mit2 = ReactDOM.findDOMNode(this.refs['mit-input-2']).value,
-    mit3 = ReactDOM.findDOMNode(this.refs['mit-input-3']).value
+  onBlur(e) {
+    // Update the tasks when focusing out
+    this.onUpdateMits()
+  }, 
 
-    // Save the MITs current values
-    mitsArray = []
-    mitsArray.push(mit1, mit2, mit3)
+  onUpdateMitStatus(id) {
+    let newStatus = this.refs["mit-status-" + id].checked
 
-    let mits = {
-      'value': mitsArray
+    Meteor.call('updateMitStatus', id, newStatus)
+  },
+
+  onUpdateMits() {
+    let mitsArray = []
+
+    for (var i = 0; i < 3; i++) {
+      let node = ReactDOM.findDOMNode(this.refs[`mit-input-${i}`])
+      let mit = {
+        _id: node.getAttribute('data-id'),
+        value: node.value
+      }
+
+      mitsArray.push(mit)
     }
 
-    Meteor.call('createMits', mits)
+    Meteor.call('updateMits', mitsArray)
   },
 
-  onMitStatusChange(index) {
-    console.log('Mit status')
-    console.log(index)
-    // Get checked status
-    console.log(this.refs["mit-status-" + index].checked)
-  },
-
-  onUpdateMits(e) {
+  onSaveMits(e) {
     e.preventDefault()
+    let mitsArray = []
 
-    let mit1 = ReactDOM.findDOMNode(this.refs['mit-input-1']).value,
-    mit2 = ReactDOM.findDOMNode(this.refs['mit-input-2']).value,
-    mit3 = ReactDOM.findDOMNode(this.refs['mit-input-3']).value
+    for (var i = 0; i < 3; i++) {
+      let mit = {
+        value: ReactDOM.findDOMNode(this.refs[`mit-input-${i}`]).value
+      }
 
-    // Update the MITs with the current values
-    mitsArray = []
-    mitsArray.push(mit1, mit2, mit3)
+      mitsArray.push(mit)
+    }
 
-    Meteor.call('updateMits', this.props.mits._id, mitsArray)
+    Meteor.call('createMits', mitsArray)
   },
+
+  showButton() {
+    if (!this.props.mits.length) {
+      return (
+        <button type="submit" onClick={this.onSaveMits} className="btn btn-lg btn-block btn-primary">
+          Save Today MITs
+        </button>
+      )
+    }
+  },
+
   render() {
     // FIXME: Refactor
-    let hasValuesForToday = this.props.mits && this.props.mits.value
+    let hasValuesForToday = this.props.mits.length
     let list
     let button
 
     // Show the tasks for day if we already have them
     if (hasValuesForToday) {
       list = (
-        this.props.mits.value.map((mit, index) => {
-            index =  index + 1
-            ref = "mit-input-" + index
-            status = "mit-status-" + index
+        this.props.mits.map((mit, index) => {
+          let ref = "mit-input-" + index
+          let statusRef = "mit-status-" + mit._id
 
           return (
-            <div key={mit} className="row">
+            <form onBlur={this.onBlur} onSubmit={this.onSubmit} key={mit._id} className="row">
               <div className="mit__list__element col-lg-12">
                 <div className="input-group">
                   <span className="input-group-addon">
                     <input
-                      defaultChecked={mit.completed}
                       type="checkbox"
-                      onChange={this.onMitStatusChange.bind(this, index)}
-                      ref={status}
+                      ref={statusRef}
+                      checked={mit.completed}
+                      onChange={this.onUpdateMitStatus.bind(this, mit._id)}
                     />
                   </span>
-                  <input defaultValue={mit} type="text" className="form-control" ref={ref} />
+                  <input
+                    className="form-control"
+                    type="text"
+                    ref={ref} 
+                    data-id={mit._id}
+                    defaultValue={mit.value}
+                  />
                 </div>
               </div>
-            </div>
+            </form>
           )}
         )
-      )
-
-      button = (
-        <button type="submit" onClick={this.onUpdateMits} className="btn btn-lg btn-block btn-primary">
-          Update tasks
-        </button>
       )
 
     } else {
@@ -89,49 +107,28 @@ MitList = React.createClass({
         <span>
           <div className="row">
             <div className="mit__list__element col-lg-12">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <input type="checkbox" />
-                </span>
-                <input type="text" className="form-control" ref="mit-input-1" />
-              </div>
+              <input placeholder="Start with a quick-win..." type="text" className="form-control" ref="mit-input-0" />
             </div>
           </div>
           <div className="row">
             <div className="mit__list__element col-lg-12">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <input type="checkbox" />
-                </span>
-                <input type="text" className="form-control" ref="mit-input-2" />
-              </div>
+              <input placeholder="Then go for a regular task..." type="text" className="form-control" ref="mit-input-1" />
             </div>
           </div>
           <div className="row">
             <div className="mit__list__element col-lg-12">
-              <div className="input-group">
-                <span className="input-group-addon">
-                  <input type="checkbox" />
-                </span>
-                <input type="text" className="form-control" ref="mit-input-3" />
-              </div>
+              <input placeholder="And finish with a long task..." type="text" className="form-control" ref="mit-input-2" />
             </div>
           </div>
 
         </span>
-      )
-
-      button = (
-        <button type="submit" onClick={this.onSaveMits} className="btn btn-lg btn-block btn-primary">
-          Continue to day schedule
-        </button>
       )
     }
 
     return (
       <div className="col-lg-12">
         {list}
-        {button}
+        {this.showButton()}
       </div>
     )
   }

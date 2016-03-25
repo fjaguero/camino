@@ -10,20 +10,20 @@ Mit = React.createClass({
 
     return {
       isLoading: ! sub.ready(),
-      mits: Mits.findOne({
+      mits: Mits.find({
         'createdAt': {
           $gte: today.toDate(),
           $lt: tomorrow.toDate()
         }
-      })
+      }).fetch()
     }
   },
 
   showForm() {
     return (
-      <form className="mit__list" name="mit" >
+      <div className="mit__list" name="mit" >
         <MitList mits={this.data.mits} />
-      </form>
+      </div>
     )
   },
 
