@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/fjaguero/camino/badges/gpa.svg)](https://codeclimate.com/github/fjaguero/camino)
+
 ![Camino](http://cl.ly/image/0g2f3B0R2I40/camino-logo.png)
 
 A daily planner to help you reach your goals.
