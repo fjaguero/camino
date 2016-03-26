@@ -6,10 +6,16 @@ TimelineTable = React.createClass({
 		}
 	},
 
+  cleanSelected() {
+    let selectedItems = document.querySelectorAll('.item.selected')
+
+    for (let prop of selectedItems) {
+      prop.classList.remove('selected')
+    }
+  },
+
   handleOnDeleteTask(taskId) {
-    Tasks.remove({
-      '_id': taskId
-    })
+    Meteor.call('deleteTask', taskId)
   },
 
   handleSelection: function(timeSelection) {
@@ -21,11 +27,7 @@ TimelineTable = React.createClass({
       'range': timeSelection
     }
 
-    let selectedItems = document.querySelectorAll('.item.selected')
-
-    for (let prop of selectedItems) {
-      prop.classList.remove('selected')
-    }
+    this.cleanSelected()
 
     // Create the task
     if (taskName) {
@@ -86,6 +88,7 @@ TimelineTable = React.createClass({
                     hour={item.hour}
                     tasks={this.props.tasks}
                     onDeleteTask={this.handleOnDeleteTask}
+                    onCleanSelected={this.cleanSelected()}
                   />
       				  })
               }
@@ -107,6 +110,7 @@ let TimeRange = React.createClass({
 
       if (confirmDelete) {
         this.props.onDeleteTask(this.task._id)
+        this.props.onCleanSelected
         this.task = {}
       }
     }

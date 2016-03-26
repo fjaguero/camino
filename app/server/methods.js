@@ -9,6 +9,10 @@ Meteor.methods({
     Tasks.insert(task)
   },
 
+  deleteTask: function(taskId) {
+    Tasks.remove(taskId)
+  },
+
   // Morning Gratitude
   createGratitude: function(gratitude) {
     // FIXME: Use collection hooks
