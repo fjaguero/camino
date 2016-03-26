@@ -14,14 +14,17 @@ TimelineTable = React.createClass({
 
   handleSelection: function(timeSelection) {
     // Check if we already have a task for that time span
-    console.log('Time selection =>')
-    console.log(timeSelection)
-
     let taskName = window.prompt('Task Name')
 
     let task = {
       'name': taskName,
       'range': timeSelection
+    }
+
+    let selectedItems = document.querySelectorAll('.item.selected')
+
+    for (let prop of selectedItems) {
+      prop.classList.remove('selected')
     }
 
     // Create the task
@@ -68,26 +71,26 @@ TimelineTable = React.createClass({
     ]
 
     return (
-      <div className="jumbotron timeline">
-        <h2 className="title">Timeline</h2>
-
-          <Selectable
-  					className="main"
-  					onSelection={this.handleSelection}
-            selectboxBorderColor="#000">
-    				{
-              timeRanges.map((item, i) => {
-                return <TimeRange
-                  onClick={this.handleClick}
-                  key={item.hour}
-                  hour={item.hour}
-                  tasks={this.props.tasks}
-                  onDeleteTask={this.handleOnDeleteTask}
-                />
-    				  })
-            }
-  				</Selectable>
-
+      <div className="jumbotron">
+          <div className="timeline section__container">
+            <h2 className="title">Timeline</h2>
+            <Selectable
+    					className="main"
+    					onSelection={this.handleSelection}
+              selectboxBorderColor="#000">
+      				{
+                timeRanges.map((item, i) => {
+                  return <TimeRange
+                    onClick={this.handleClick}
+                    key={item.hour}
+                    hour={item.hour}
+                    tasks={this.props.tasks}
+                    onDeleteTask={this.handleOnDeleteTask}
+                  />
+      				  })
+              }
+    				</Selectable>
+          </div>
       </div>
     );
   }
