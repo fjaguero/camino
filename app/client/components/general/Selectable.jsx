@@ -129,9 +129,10 @@ Selectable = React.createClass({
       position: 'absolute',
       cursor: 'default'
     };
+
     var spanStyle = {
-      backgroundColor: 'rgba(0, 162, 255, 0.4)',
-      border: '1px solid rgba(0, 162, 255, 0.8)',
+      backgroundColor: 'transparent',
+      border: 'none',
       width: '100%',
       height: '100%',
       float: 'left'
@@ -161,6 +162,9 @@ Selectable = React.createClass({
     var w = Math.abs(this._mouseDownData.initialW - e.pageX);
     var h = Math.abs(this._mouseDownData.initialH - e.pageY);
 
+    // Select the clicked ranges
+    this._markAsSelected(e);
+
     this.setState({
       isBoxSelecting: true,
       boxWidth: w,
@@ -171,12 +175,27 @@ Selectable = React.createClass({
     });
   },
 
+ /**
+ * Called when a user presses the mouse button and selects ranges.
+ * Marks the selections with the background.
+ */
+  _markAsSelected: function(e) {
+    var itemClasses = e.target.classList;
+
+    if (!itemClasses.contains('selected') && itemClasses.contains('item')) {
+      e.target.classList.add('selected');
+    }
+  },
+
   /**
    * Called when a user presses the mouse button. Determines if a select box should
    * be added, and if so, attach event listeners
    */
   _mouseDown: function (e) {
     var node = this,collides, offsetData, distanceData;
+
+    // Select the clicked range
+    this._markAsSelected(e);
 
     document.addEventListener('mouseup', this._mouseUp);
 
