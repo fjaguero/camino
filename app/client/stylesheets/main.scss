@@ -1,5 +1,8 @@
 @import '{reywood:bootstrap3-sass}/bootstrap';
+
+// Components
 @import 'components/Spinner';
+@import 'components/Modal';
 
 // Temporal Override
 .jumbotron {
@@ -143,4 +146,3 @@
 .timeline {
   text-align: center;
 }
-
