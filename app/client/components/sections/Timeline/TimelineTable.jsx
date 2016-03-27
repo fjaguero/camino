@@ -2,11 +2,32 @@ TimelineTable = React.createClass({
 
   getInitialState() {
 		return {
-			'selectedItems': []
+      'timeRanges': [],
+      'isModalVisible': false
 		}
 	},
 
-  cleanSelected() {
+  createTask(name, timeRanges) {
+    if (name && timeRanges) {
+      Meteor.call('createTask', {name, timeRanges}) 
+    }
+  },
+
+  hideModal() {
+   this.setState({isModalVisible: false, timeRanges: []})
+  },
+
+  handleOnDeleteTask(taskId) {
+    Meteor.call('deleteTask', taskId)
+  },
+
+  handleOnSelection: function(timeRanges) {
+    // Show modal and save the selected ranges to be used later
+    this.setState({isModalVisible: true, timeRanges: timeRanges})
+    this.handleOnCleanSelected()
+  },
+
+  handleOnCleanSelected() {
     let selectedItems = document.querySelectorAll('.item.selected')
 
     for (let prop of selectedItems) {
@@ -14,29 +35,18 @@ TimelineTable = React.createClass({
     }
   },
 
-  handleOnDeleteTask(taskId) {
-    Meteor.call('deleteTask', taskId)
+  handleOnCancel() {
+    this.hideModal()
   },
 
-  handleSelection: function(timeSelection) {
-    // Check if we already have a task for that time span
-    let taskName = window.prompt('Task Name')
-
-    let task = {
-      'name': taskName,
-      'range': timeSelection
-    }
-
-    this.cleanSelected()
-
-    // Create the task
-    if (taskName) {
-      Meteor.call('createTask', task)
-    }
+  handleOnConfirm(taskName) {
+    this.createTask(taskName, this.state.timeRanges)
+    this.hideModal()
   },
 
   render() {
-    timeRanges = [
+    let newTaskModal
+    let timeRanges = [
       { hour: '8:00'},
       { hour: '8:30'},
       { hour: '9:00'},
@@ -72,75 +82,38 @@ TimelineTable = React.createClass({
       { hour: '24:00'}
     ]
 
+    // Show the "New Task" modal
+    if (this.state.isModalVisible) {
+      newTaskModal = (
+        <Modal onConfirm={this.handleOnConfirm} onCancel={this.handleOnCancel} />
+      )
+    }
+
     return (
       <div className="jumbotron">
-          <div className="timeline section__container">
-            <h2 className="title">Timeline</h2>
-            <Selectable
-    					className="main"
-    					onSelection={this.handleSelection}
-              selectboxBorderColor="#000">
-      				{
-                timeRanges.map((item, i) => {
-                  return <TimeRange
-                    onClick={this.handleClick}
-                    key={item.hour}
-                    hour={item.hour}
-                    tasks={this.props.tasks}
-                    onDeleteTask={this.handleOnDeleteTask}
-                    onCleanSelected={this.cleanSelected()}
-                  />
-      				  })
-              }
-    				</Selectable>
-          </div>
+        <div className="timeline section__container">
+          <h2 className="title">Timeline</h2>
+          <Selectable
+  					className="main"
+  					onSelection={this.handleOnSelection}
+            selectboxBorderColor="#000">
+    				{
+              timeRanges.map((item, i) => {
+                return <TimeRange
+                  key={item.hour}
+                  hour={item.hour}
+                  tasks={this.props.tasks}
+                  onClick={this.handleClick}
+                  onDeleteTask={this.handleOnDeleteTask}
+                  onCleanSelected={this.handleOnCleanSelected()}
+                />
+    				  })
+            }
+  				</Selectable>
+        </div>
+        {newTaskModal} 
       </div>
     );
   }
 
-});
-
-
-let TimeRange = React.createClass({
-
-  handleClick(e) {
-    // Allow deletion of a single task
-    if (this.task && this.task.name) {
-      let confirmDelete = window.confirm("Delete the task?")
-
-      if (confirmDelete) {
-        this.props.onDeleteTask(this.task._id)
-        this.props.onCleanSelected
-        this.task = {}
-      }
-    }
-
-  },
-
-	render() {
-		let classes = this.props.selected ? 'item selected' : 'item'
-    let taskName = ''
-
-    // Check if there is a task for this time span
-    this.props.tasks.map( (task) => {
-      let hasTask = _.contains(task.range, this.props.hour)
-
-      if (hasTask) {
-        this.task = task
-      }
-
-    })
-
-    if (this.task && this.task.name) {
-      taskName = this.task.name
-    }
-
-		return (
-			<div onClick={this.handleClick} className={classes}>
-				<span className="item-hour">{this.props.hour}</span>
-        <span className="item-content">{taskName}</span>
-			</div>
-		);
-
-	}
-});
+})
