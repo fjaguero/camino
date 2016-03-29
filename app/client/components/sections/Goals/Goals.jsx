@@ -1,6 +1,7 @@
 Camino.Goals = React.createClass({
   mixins: [ReactMeteorData],
 
+  // Fetch the data. Reactive and real-time by default.
   getMeteorData() {
     let sub = Meteor.subscribe("goals")
 
@@ -12,7 +13,8 @@ Camino.Goals = React.createClass({
     }
   },
 
-  showContent() {
+  // Pass the data to the view
+  showGoals() {
     return (
       <div className="goals section__container">
         <GoalsList goals={this.data.goals} />
@@ -20,16 +22,18 @@ Camino.Goals = React.createClass({
     )
   },
 
+  // Show a loading spinner
   showSpinner() {
     return <Spinner />
   },
 
+  // Render the Goals view
   render() {
     return (
       <div className="jumbotron">
         <div className="container">
           {
-            this.data.isLoading ? this.showSpinner() : this.showContent()
+            this.data.isLoading ? this.showSpinner() : this.showGoals()
           }
         </div>
       </div>
