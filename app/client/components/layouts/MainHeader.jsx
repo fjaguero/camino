@@ -56,14 +56,6 @@ Camino.MainHeader = React.createClass({
           </li>
         )
 
-        optionsButton = (
-          <li title="Config" className={optionsBtnClass}>
-            <a onClick={this.navigateTo.bind(this, '/config')}>
-              <span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-          </li>
-        )
-
         logoutButton = (
           <li>
             <a title="Logout" onClick={this.handleLogout}>
@@ -79,7 +71,6 @@ Camino.MainHeader = React.createClass({
             {homeButton}
             {mgtButton}
             {timelineButton}
-            {optionsButton}
             {logoutButton}
           </ul>
         </nav>
