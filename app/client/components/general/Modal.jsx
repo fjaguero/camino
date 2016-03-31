@@ -4,6 +4,10 @@ Modal = React.createClass({
     onConfirm: React.PropTypes.func
   },
 
+  componentDidMount() {
+    ReactDOM.findDOMNode(this.refs.taskName).focus();
+  },
+
   onCreateTask() {
     let taskName = document.getElementById('task-name').value
 
@@ -24,13 +28,13 @@ Modal = React.createClass({
           <div className="modal-content">
             <div className="modal-header">
               <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 className="modal-title" id="exampleModalLabel">New task</h4>
+              <h4 className="modal-title">New task</h4>
             </div>
             <div className="modal-body">
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <label htmlFor="recipient-name" className="control-label">Name:</label>
-                  <input type="text" className="form-control" id="task-name" />
+                  <input type="text" className="form-control" id="task-name" ref="taskName" />
                 </div>
               </form>
             </div>
@@ -40,7 +44,7 @@ Modal = React.createClass({
             </div>
           </div>
         </div>
-      </div>    
+      </div>
     )
   }
 
