@@ -50,12 +50,12 @@ FlowRouter.route("/config", {
 
 FlowRouter.route("/login", {
     name: "Login",
-    subscriptions(params) {
-
-    },
     action(params) {
       renderMainLayoutWith(<Camino.UserLogin />);
-    }
+    },
+    triggersEnter: [function(context, redirect) {
+      redirect('/');
+    }]
 });
 
 FlowRouter.notFound = {
@@ -76,6 +76,6 @@ function renderMainLayoutWith(component) {
 
 function checkIsLoggedIn() {
   if (!Meteor.userId()) {
-    FlowRouter.go('Login');
+    FlowRouter.go('Login')
   }
 }
