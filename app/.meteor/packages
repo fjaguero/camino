@@ -28,7 +28,6 @@ accounts-password
 reywood:bootstrap3-sass
 momentjs:moment
 msavin:mongol
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -46,3 +45,5 @@ force-ssl
 meteortoys:allthings
 ildar:react-select
 rwatts:uuid
+standard-minifier-css
+standard-minifier-js
